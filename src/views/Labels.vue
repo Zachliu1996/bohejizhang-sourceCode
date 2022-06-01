@@ -1,13 +1,14 @@
 <template>
 <div>
   labels
+  <Nav/>
 </div>
 </template>
 
 <script lang="ts">
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: 'Labels'
+  name: 'Labels',
 };
 </script>
 

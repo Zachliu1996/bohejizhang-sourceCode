@@ -1,12 +1,14 @@
 <template>
 <div>
   money
+  <Nav/>
 </div>
 </template>
 
 <script lang="ts">
 export default {
-  name: 'Money'
+  // eslint-disable-next-line vue/multi-word-component-names
+  name: 'Money',
 };
 </script>
 

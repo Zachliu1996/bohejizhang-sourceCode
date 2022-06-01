@@ -1,13 +1,15 @@
 <template>
 <div>
   stati
+  <Nav/>
 </div>
 </template>
 
 <script lang="ts">
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: 'Statistics'
+  name: 'Statistics',
+
 };
 </script>
 
