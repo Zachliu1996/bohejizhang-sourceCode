@@ -1,6 +1,8 @@
 <template>
   <div>
     <Layout>
+      <h3>全部标签</h3>
+      <hr>
       <div class="tags">
         <router-link class="tag" v-for="tag in tags" :key="tag.id" :to="`/labels/edit/${tag.id}`">
           <span>{{ tag.name }}</span>
@@ -39,6 +41,12 @@ export default class Labels extends mixins(TagHelper) {
 </script>
 
 <style lang="scss" scoped>
+h3 {
+  text-align: center;
+  background: #9acba3;
+  padding: 16px 0;
+}
+
 .tags {
   background: white;
   font-size: 16px;

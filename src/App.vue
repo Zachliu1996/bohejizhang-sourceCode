@@ -40,4 +40,10 @@ button, input {
 :focus {
   outline: none;
 }
+
+#app {
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
 </style>
