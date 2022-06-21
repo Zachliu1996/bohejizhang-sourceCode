@@ -3,6 +3,13 @@
     <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
     <Tabs :data-source="recordTypeList"
           :value.sync="record.type"/>
+    <div class="createdAt">
+      <FormItem field-name="日期："
+                type = "date"
+                placeholder="请在此输入日期"
+                :value.sync="record.createdAt"
+      />
+    </div>
     <div class="notes">
       <FormItem field-name="备注："
                 placeholder="请在此输入备注"
@@ -10,6 +17,7 @@
       />
     </div>
     <Tags @update:value="record.tags = $event"/>
+    <h2>薄荷记账</h2>
   </Layout>
 </template>
 
@@ -35,7 +43,7 @@ export default class Money extends Vue {
   recordTypeList = recordTypeList;
 
   record: RecordItem = {
-    tags: [], notes: '', type: '-', amount: 0
+    tags: [], notes: '', type: '-', amount: 0,createdAt:new Date().toISOString()
   };
 
   created() {
@@ -66,5 +74,12 @@ export default class Money extends Vue {
 
 .notes {
   padding: 12px 0;
+}
+
+h2 {
+  text-align: center;
+  background: #9acba3;
+  padding: 16px 0;
+  font-size: 20px;
 }
 </style>

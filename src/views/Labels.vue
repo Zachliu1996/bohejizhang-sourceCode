@@ -45,6 +45,7 @@ h3 {
   text-align: center;
   background: #9acba3;
   padding: 16px 0;
+  font-size: 20px;
 }
 
 .tags {
