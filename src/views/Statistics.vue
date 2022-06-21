@@ -2,6 +2,9 @@
   <div>
     <Layout>
       <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"/>
+      <div class="chart-wrapper" ref="chartWrapper">
+        <Chart class="chart" :options="x"/>
+      </div>
       <hr>
       <ol v-if="groupedList.length>0">
         <li v-for="(group, index) in groupedList" :key="index">
@@ -31,13 +34,17 @@ import Tabs from '@/components/Tabs.vue';
 import recordTypeList from '@/constants/recordTypeList';
 import dayjs from 'dayjs';
 import clone from '@/lib/clone';
+import Chart from '@/components/Chart.vue';
 
 @Component({
-  components: {Tabs},
+  components: {Tabs,Chart},
 })
 export default class Statistics extends Vue {
   tagString(tags: Tag[]) {
     return tags.length === 0 ? '无' : tags.map(t => t.name).join('，');
+  }
+  mounted() {
+    (this.$refs.chartWrapper as HTMLDivElement).scrollLeft = 9999;
   }
 
   beautify(string: string) {
@@ -56,6 +63,45 @@ export default class Statistics extends Vue {
     }
   }
 
+  get x(){
+    return {
+      grid:{
+        left:0,
+        right:0,
+      },
+      xAxis: {
+        type: 'category',
+        data: [
+          '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+          '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
+          '21', '22', '23', '24', '25', '26', '27', '28', '29', '30',
+        ],
+        axisTick: {alignWithLabel: true},
+        axisLine: {lineStyle: {color: '#666'}}
+      },
+      yAxis: {
+        type: 'value',
+        show:false
+      },
+      series: [{
+        symbol: 'circle',
+        symbolSize: 12,
+        itemStyle: {borderWidth: 1, color: 'green', borderColor: 'green'},
+        data: [
+          820, 932, 901, 934, 1290, 1330, 1320,
+          820, 932, 901, 934, 1290, 1330, 1320,
+          820, 932, 901, 934, 1290, 1330, 1320,
+          820, 932, 901, 934, 1290, 1330, 1320, 1, 2
+        ],
+        type: 'line'
+      }],
+      tooltip: {
+        show: true, triggerOn: 'click',
+        position: 'top',
+        formatter: '{c}'
+      }
+    }
+  }
   get recordList() {
     return (this.$store.state as RootState).recordList;
   }
@@ -96,6 +142,20 @@ export default class Statistics extends Vue {
 </script>
 
 <style scoped lang="scss">
+.chart{
+  width: 430%;
+  &-wrapper {
+    overflow: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+.echarts{
+  max-width: 100%;
+  height: 400px;
+}
+
 .noResult {
   padding: 16px 4px;
   text-align: center;
